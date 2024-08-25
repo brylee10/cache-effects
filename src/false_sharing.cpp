@@ -1,15 +1,11 @@
 /**
- * @file false_sharing.cpp
- * @brief A program to benchmark the impact of false sharing in a multithreaded environment.
- *
  * This benchmark demonstrates the concept of false sharing by spawning multiple threads that
  * access and update separate `std::atomic<int>` variables. False sharing occurs when multiple
  * threads modify independent variables that reside on the same cache line, leading to unnecessary
  * cache invalidations and performance degradation.
- *
  */
+
 #include <benchmark/benchmark.h>
-#include <spdlog/spdlog.h>
 #include <atomic>
 #include <thread>
 #include <vector>
@@ -30,7 +26,6 @@ struct UnalignedAtomic
 template <typename AtomicType, unsigned int num_threads, unsigned int iterations>
 void false_sharing_benchmark(benchmark::State &state)
 {
-    spdlog::set_level(spdlog::level::err);
     static_assert(num_threads >= 1 && num_threads <= MAX_THREADS, "Invalid number of threads");
 
     std::vector<std::thread> threads(num_threads);

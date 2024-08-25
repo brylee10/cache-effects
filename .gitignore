@@ -1,0 +1,14 @@
+.vscode
+
+# CMake
+*.cmake
+CMakeCache.txt
+Makefile
+CMakeFiles
+
+# Google Benchmark
+_deps
+
+# Compiled Artifacts
+bin
+asm
