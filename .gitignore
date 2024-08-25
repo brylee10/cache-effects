@@ -12,3 +12,9 @@ _deps
 # Compiled Artifacts
 bin
 asm
+
+# Profiling
+profiling
+
+# MacOS
+*.dSYM
