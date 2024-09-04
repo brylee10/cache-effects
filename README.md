@@ -145,6 +145,21 @@ Unexpectedly, the median latency across iterations decreases by a factor of 2 fo
 
 The disassembled object file for this test is output to `asm/cache_strides.cpp.s` for more detailed analysis. 
 
+## SIMD 
+**Test name**: `simd_dot`
+
+This code demonstrates how to benchmark SIMD operations using the ARM NEON SIMD intrinsics and compares it with the standard scalar dot product using `std::inner_product`. The code benchmarks the dot product of two vectors of different sizes using the Google Benchmark framework, comparing the performance of SIMD-based computations with scalar computations. The SIMD operations are benchmarked using a `float32x4_t` which represents a 128-bit register holding a vector of 4 single precision floating point numbers. 
+
+ARMv7 supports special 128-bit vector registers (the `Q`, as opposed to the 64 bit `D` registers) which are partitioned into "lanes". Operations such as addition and multiplication are performed in parallel between two such vector registers. Here is an illustrative image of a parallel addition of eight 16-bit registers between two vector registers, `Q1` and `Q2`, where the result is stored in `Q0`. Image taken from the [ARM NEON overview.](https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/What-is-NEON-).
+
+<img src="assets/SIMD_example.png" alt="ARM Register Image" width="500px" />
+
+The two are compared across different array sizes, representing 32-bit floating point dot products between different square images.
+
+In general, the SIMD operations demonstrate a 4x speed up over the `std::inner_product`.
+
+![SIMD](assets/SIMD.png)
+
 # Appendix
 
 ## Strong and Weakly Ordered Architectures

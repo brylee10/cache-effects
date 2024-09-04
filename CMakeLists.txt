@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.10)
 project(CacheEffects LANGUAGES CXX ASM)
 
 # Set the C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Output executables to the 'bin' directory
@@ -36,6 +36,9 @@ target_link_libraries(false_sharing_bench benchmark::benchmark)
 add_executable(cache_strides_bench src/cache_strides.cpp)
 
 add_executable(cache_misses src/cache_misses.cpp)
+
+add_executable(simd_dot src/simd_dot.cpp)
+target_link_libraries(simd_dot benchmark::benchmark)
 
 # Considered copying the assembly output from cmake via https://gist.github.com/Manu343726/64c0a75c089ad96d22cb
 # but the assembly does not contain debug info.
